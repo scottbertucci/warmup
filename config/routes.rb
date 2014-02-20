@@ -2,15 +2,10 @@ Server::Application.routes.draw do
 
   resources :users
   
-  match '/users/login' => 'users#login'
-  match '/users/add' => 'users#add'
-  
-  post '/users/login' => 'users#login'
-  post '/users/add' => 'users#add'
-  post '/TESTAPI/resetFixture' => 'users#reset'
-  post '/TESTAPI/unitTests' => 'users#tests'
-
-
+  match '/users/login', to: 'users#login', via: :post
+  match '/users/add', to: 'users#add', via: :post
+  match '/TESTAPI/resetFixture', to: 'users#reset', via: :post
+  match '/TESTAPI/unitTests', to: 'users#tests', via: :post
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -61,7 +56,7 @@ Server::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'welcome#index'
+  root :to => 'users#client'
 
   # See how all your routes lay out with "rake routes"
 

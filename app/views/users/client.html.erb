@@ -1,5 +1,12 @@
+
+<% if @message %>
+  <h3>Error</h3>
+  <p><%= @message %></p>
+<% end %>
+
 <%= form_for @user do |f| -%>
     <%= f.text_field :name %><br />
     <%= f.text_field :password %><br />
-    <%= f.submit %>
+    <%= f.submit :Login, :name=>'login' %>
+	<%= f.submit :Add %>
 <% end -%>
