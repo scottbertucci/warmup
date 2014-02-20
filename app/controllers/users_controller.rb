@@ -67,6 +67,9 @@ class UsersController < ApplicationController
 	  elsif :password != User.find_by_name(:username.downcase).password
 	    @error = -1 #ERR_BAD_CREDENTIALS
 	  else
+	    @user = User.find_by_name(:username.downcase)
+	    @user.count = @user.count + 1
+	    @user.save
 	    @error = 1 #SUCCESS
 	  end
 	else
@@ -76,9 +79,11 @@ class UsersController < ApplicationController
 	    @error = -3 #ERR_BAD_USERNAME
 	  elsif :password.length >= 128
 	    @error = -4 #ERR_BAD_PASSWORD
-	  elsif User.find_by_name(:username) != nil
+	  elsif User.find_by_name(:username)
 	    @error = -2 #ERR_USER_EXISTS
 	  else
+	    @user = User.new(name: :username.downcase, password: :password, count: 1)
+	    @user.save
 	    @error = 1 #SUCCESS
 	  end
 	end
